@@ -35,9 +35,20 @@ var el = document.getElementById('container');
 
 State.set(el, 'default');
 State.set(el, 'warning');
+State.set(el, 'default');
 State.clear(el);
 ```
-**TODO: jQuery plugin**.
+
+If you are using [jQuery](http://jquery.com/) to manipulate the DOM, the same native
+API is available on jQuery objects.
+
+```js
+var el = $('#container');
+
+el.setState('default');
+el.setState('warning');
+el.setState('default');
+```
 
 ## License
 

@@ -1,0 +1,23 @@
+{
+  "name": "state",
+  "main": "state.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lucasmazza/state",
+  "authors": [
+    "Lucas Mazza <lucastmazza@gmail.com>"
+  ],
+  "description": "Manage element states through CSS.",
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "package.json",
+    "node_modules",
+    "script",
+    "bower_components",
+    "test",
+    "gulpfile.js"
+  ],
+  "devDependencies": {
+    "qunit": "~1.14.0"
+  }
+}

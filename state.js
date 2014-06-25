@@ -18,6 +18,21 @@
     return element;
   };
 
+  // Public: Gets the state that the element is on, checking if any state class
+  // is present on the element.
+  //
+  // element - A DOM element.
+  //
+  // Returns a String or undefined if the element is not in any state.
+  State.get = function(element) {
+    var states = State._getStates(element),
+        state = states[0];
+
+    if (state) {
+      return state.replace(new RegExp('^' + State.prefix), '');
+    }
+  };
+
   // Public: Clears all the states in the element classList.
   // element - A DOM element.
   //
@@ -48,12 +63,36 @@
     return states;
   };
 
-  Element.prototype.setState = function(state) {
-    return State.set(this, state);
-  };
+  if(root.Element) {
+    Element.prototype.setState = function(state) {
+      return State.set(this, state);
+    };
 
-  Element.prototype.clearState = function() {
-    return State.clear(this);
-  };
+    Element.prototype.getState = function() {
+      return State.get(this);
+    };
+
+    Element.prototype.clearState = function() {
+      return State.clear(this);
+    };
+  }
+
+  if(root.jQuery) {
+    root.jQuery.fn.setState = function(state) {
+      return this.each(function() {
+        State.set(this, state);
+      });
+    };
+
+    root.jQuery.fn.getState = function() {
+      return State.get(this.get(0));
+    };
+
+    root.jQuery.fn.clearState = function() {
+      return this.each(function() {
+        State.clear(this);
+      });
+    };
+  }
   root.State = State;
 })(this);
