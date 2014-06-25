@@ -14,14 +14,17 @@ state adds a small API to every DOM element to add/remove states.
 
 ```js
 var el = document.getElementById('container');
-// Sets the 'state-default' class on the element.
-el.setState('default');
+// Sets the 'state-loading' class on the element.
+el.setState('loading');
 
-// Sets the 'state-warning' class, and remove the 'state-default' class.
-el.setState('warning');
+// Sets the 'state-done' class, and remove the 'state-loading' class.
+el.setState('done');
 
-// Sets the 'state-default' class back, removing the 'state-warning'.
-el.setState('default');
+// 'getState' returns the state of the element.
+el.getState(); // 'done'.
+
+// Sets the 'state-loading' class back, removing the 'state-done'.
+el.setState('loading');
 
 // Removes all 'state-*' classes from the element.
 el.clearState();
@@ -33,9 +36,9 @@ with functions exported through the `State` object.
 ```js
 var el = document.getElementById('container');
 
-State.set(el, 'default');
-State.set(el, 'warning');
-State.set(el, 'default');
+State.set(el, 'loading');
+State.set(el, 'done');
+State.set(el, 'loading');
 State.clear(el);
 ```
 
@@ -45,9 +48,9 @@ API is available on jQuery objects.
 ```js
 var el = $('#container');
 
-el.setState('default');
-el.setState('warning');
-el.setState('default');
+el.setState('loading');
+el.setState('done');
+el.setState('loading');
 ```
 
 ## License
