@@ -2,19 +2,33 @@
   "name": "state",
   "version": "0.0.0",
   "description": "Manage element states through CSS.",
-  "main": "state.js",
+  "repository": "lucasmazza/state",
+  "license": "Apache-2.0",
+  "main": "lib/state.js",
+  "keywords": [],
+  "dependencies": {
+    "tiny-emitter": "^1.0.0"
+  },
   "devDependencies": {
-    "gulp": "^3.8.0",
-    "jshint-stylish": "^0.2.0",
-    "gulp-jshint": "^1.6.3"
+    "babel": "^5.8.29",
+    "babelify": "^6.3.0",
+    "bannerify": "Vekat/bannerify#feature-option",
+    "browserify": "^11.2.0",
+    "karma": "^0.13.15",
+    "karma-browserify": "^4.4.2",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-qunit": "^0.1.8",
+    "phantomjs": "^1.9.19",
+    "qunitjs": "^1.20.0",
+    "uglify-js": "^2.4.24",
+    "watchify": "^3.4.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lucasmazza/state.js.git"
-  },
-  "author": "Lucas Mazza",
-  "license": "Apache 2.0",
-  "bugs": {
-    "url": "https://github.com/lucasmazza/state.js/issues"
+  "scripts": {
+    "build": "npm run build-debug && npm run build-min",
+    "build-debug": "browserify src/state.js -s State -t [babelify --loose all] -p [bannerify --file .banner ] -o dist/state.js",
+    "build-min": "uglifyjs dist/state.js --comments '/!/' -m screw_ie8=true -c screw_ie8=true,unused=false -o dist/state.min.js",
+    "build-watch": "watchify src/state.js -s State -t [babelify --loose all] -o dist/state.js -v",
+    "test": "karma start --single-run",
+    "prepublish": "babel src --out-dir lib --loose all"
   }
 }

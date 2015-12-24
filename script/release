@@ -37,6 +37,7 @@ end
   end
 end
 
-execute "commiting #{version} update...", "git add ./*.json && git commit -m 'Release #{version}'"
+execute 'Building final version', 'npm run build'
+execute "Commiting #{version} update...", "git add ./*.json && git commit -m 'Release #{version}'"
 execute "Creating #{version}...", "git tag -a 'v#{version}' -m 'Version #{version}'"
 execute '/play pushit', 'git push --tags && git push'

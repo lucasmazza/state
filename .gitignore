@@ -1,4 +1,4 @@
-tmp
-.jhw-cache
-node_modules
+lib
+npm-debug.log
 bower_components
+node_modules

@@ -1,39 +1,51 @@
-/*global QUnit:true,State:true*/
-var setup = {
-  setup: function() {
+import State from '../src/state';
+
+QUnit.module('State', {
+  beforeEach: function() {
     this.element = document.createElement('div');
+    this.element.classList.add('test-class');
+    this.state = new State(this.element);
   }
-};
-
-QUnit.module('State#set', setup);
-
-QUnit.test('it sets the state of an element through a class', function(assert) {
-  State.set(this.element, 'loading');
-
-  assert.haveClass(this.element, 'state-loading');
 });
 
-QUnit.test('it does not mantain multiple state classes at the same time', function(assert) {
-  State.set(this.element, 'loading');
-  State.set(this.element, 'done');
+QUnit.test('sets the state of the element', function(assert) {
+  assert.equal(this.state.get(), undefined);
+  this.state.set('loading');
 
-  assert.haveClass(this.element, 'state-done');
-  assert.notHaveClass(this.element, 'state-loading');
+  assert.equal(this.state.get(), 'loading');
+  assert.equal(this.element.getAttribute('class'), 'test-class is-loading');
+  assert.ok(this.state.is('loading'), `Expected state to be 'loading', but was ${this.state.get()}`);
+
+  this.state.set('loaded');
+
+  assert.equal(this.state.get(), 'loaded');
+  assert.equal(this.element.getAttribute('class'), 'test-class is-loaded');
+  assert.ok(this.state.is('loaded'), `Expected state to be 'loaded', but was ${this.state.get()}`);
+
+  this.state.clear();
+  assert.equal(this.state.get(), undefined);
+  assert.equal(this.element.getAttribute('class'), 'test-class');
 });
 
-QUnit.module('State#get', setup);
+QUnit.test('triggers the callback when entering the given state', function(assert) {
+  this.state.enter('loading', () => assert.ok(true));
 
-QUnit.test('gets the state of an element', function(assert) {
-  State.set(this.element, 'loading');
-  assert.equal(State.get(this.element), 'loading');
+  this.state.set('loading');
 });
 
-QUnit.module('State#clear', setup);
+QUnit.test('triggers the callback when leaving the given state', function(assert) {
+  this.state.set('loading');
 
-QUnit.test('it removes the class when clearing the state of the element', function(assert) {
-  State.set(this.element, 'loading');
-  assert.haveClass(this.element, 'state-loading');
+  this.state.leave('loading', () => assert.ok(true));
+  this.state.set('loaded');
 
-  State.clear(this.element);
-  assert.notHaveClass(this.element, 'state-loading');
+  this.state.leave('loaded', () => assert.ok(true));
+  this.state.clear();
+});
+
+QUnit.test('supports a custom prefix for the state classes', function(assert) {
+  this.state.prefix = 'has-';
+  this.state.set('failed');
+
+  assert.equal(this.element.getAttribute('class'), 'test-class has-failed');
 });
