@@ -41,6 +41,7 @@ QUnit.test('triggers the callback when leaving the given state', function(assert
 
   this.state.leave('loaded', () => assert.ok(true));
   this.state.clear();
+  expect(2);
 });
 
 QUnit.test('supports a custom prefix for the state classes', function(assert) {
