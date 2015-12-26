@@ -1,12 +1,14 @@
 {
   "name": "state",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Manage element states through CSS.",
   "repository": "https://github.com/lucasmazza/state",
   "author": "Lucas Mazza <lucastmazza@gmail.com>",
   "license": "Apache-2.0",
   "main": "dist/state.js",
-  "keywords": [],
+  "keywords": [
+
+  ],
   "dependencies": {
     "tiny-emitter": "^1.0.0"
   },
