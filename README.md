@@ -10,7 +10,7 @@ the state of the element.
 bower install lucasmazza/state --save
 ```
 
-Or you can [download a zip](https://github.com/lucasmazza/state/archive/master.zip) file.
+Or you can [download a zip](https://github.com/lucasmazza/state/releases) file.
 
 ## Usage
 
