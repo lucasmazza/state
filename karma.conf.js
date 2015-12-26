@@ -1,28 +1,16 @@
 module.exports = function(config) {
   config.set({
-    plugins: ['karma-browserify', 'karma-qunit', 'karma-phantomjs-launcher'],
-    frameworks: ['browserify', 'qunit'],
-    files: [
-      'src/*.js',
-      'test/*.js'
-    ],
-    exclude: [
-    ],
-    preprocessors: {
-      'src/**/*.js' : ['browserify'],
-      'test/**/*.js': ['browserify']
-    },
+    plugins: ['karma-webpack', 'karma-qunit', 'karma-phantomjs-launcher'],
+    frameworks: ['qunit'],
+    files: ['test/*.js'],
+    preprocessors: { 'test/**/*.js': ['webpack'] },
     reporters: ['progress'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_DISABLE,
     autoWatch: true,
     browsers: ['PhantomJS'],
-    singleRun: false,
-    concurrency: Infinity,
-    browserify: {
-      debug: true,
-      transform: ['babelify']
-    }
+    webpack: { module: require('./webpack.config.js').module },
+    singleRun: false
   })
 }

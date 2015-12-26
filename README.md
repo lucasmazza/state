@@ -17,6 +17,8 @@ Or you can [download a zip](https://github.com/lucasmazza/state/archive/master.z
 state adds a small API to every DOM element to add/remove states.
 
 ```js
+import State from 'state';
+
 const el = document.getElementById('container');
 const state = new State(el);
 

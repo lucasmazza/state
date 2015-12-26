@@ -1,158 +1,230 @@
 /*!
- * state.js v1.0.1
+ * state v1.0.1
  * https://github.com/lucasmazza/state
- *
- * Licensed Apache 2.0 © Lucas Mazza
+ * 
+ * Licensed Apache-2.0 © Lucas Mazza <lucastmazza@gmail.com>
  */
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.State = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-function E () {
-	// Keep this empty so it's easier to inherit from
-  // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
-}
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("state", [], factory);
+	else if(typeof exports === 'object')
+		exports["state"] = factory();
+	else
+		root["state"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
 
-E.prototype = {
-	on: function (name, callback, ctx) {
-    var e = this.e || (this.e = {});
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
 
-    (e[name] || (e[name] = [])).push({
-      fn: callback,
-      ctx: ctx
-    });
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
 
-    return this;
-  },
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
 
-  once: function (name, callback, ctx) {
-    var self = this;
-    function listener () {
-      self.off(name, listener);
-      callback.apply(ctx, arguments);
-    };
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
-    listener._ = callback
-    return this.on(name, listener, ctx);
-  },
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 
-  emit: function (name) {
-    var data = [].slice.call(arguments, 1);
-    var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
-    var i = 0;
-    var len = evtArr.length;
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
 
-    for (i; i < len; i++) {
-      evtArr[i].fn.apply(evtArr[i].ctx, data);
-    }
 
-    return this;
-  },
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
 
-  off: function (name, callback) {
-    var e = this.e || (this.e = {});
-    var evts = e[name];
-    var liveEvents = [];
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
 
-    if (evts && callback) {
-      for (var i = 0, len = evts.length; i < len; i++) {
-        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
-          liveEvents.push(evts[i]);
-      }
-    }
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
 
-    // Remove event from queue to prevent memory leak
-    // Suggested by https://github.com/lazd
-    // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
 
-    (liveEvents.length)
-      ? e[name] = liveEvents
-      : delete e[name];
+	'use strict';
 
-    return this;
-  }
-};
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-module.exports = E;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
-},{}],2:[function(require,module,exports){
-'use strict';
+	var _tinyEmitter = __webpack_require__(1);
 
-exports.__esModule = true;
+	var _tinyEmitter2 = _interopRequireDefault(_tinyEmitter);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _tinyEmitter = require('tiny-emitter');
+	var filter = Array.prototype.filter;
 
-var _tinyEmitter2 = _interopRequireDefault(_tinyEmitter);
+	var State = (function () {
+	  function State(element) {
+	    _classCallCheck(this, State);
 
-var filter = Array.prototype.filter;
+	    this.element = element;
+	    this.prefix = 'is-';
+	    this.emitter = new _tinyEmitter2.default();
+	  }
 
-var State = (function () {
-  function State(element) {
-    _classCallCheck(this, State);
+	  _createClass(State, [{
+	    key: 'set',
+	    value: function set(state) {
+	      this.clear();
+	      this.element.classList.add('' + this.prefix + state);
+	      this.emitter.emit('enter:' + state);
+	    }
+	  }, {
+	    key: 'get',
+	    value: function get() {
+	      var state = this._getStates()[0];
+	      return state && state.replace(this._matcher(), '');
+	    }
+	  }, {
+	    key: 'enter',
+	    value: function enter(states, callback) {
+	      var _this = this;
 
-    this.element = element;
-    this.prefix = 'is-';
-    this.emitter = new _tinyEmitter2['default']();
-  }
+	      states.split(' ').forEach(function (state) {
+	        return _this.emitter.on('enter:' + state, callback);
+	      });
+	    }
+	  }, {
+	    key: 'leave',
+	    value: function leave(states, callback) {
+	      var _this2 = this;
 
-  State.prototype.set = function set(state) {
-    this.clear();
-    this.element.classList.add('' + this.prefix + state);
-    this.emitter.emit('enter:' + state);
-  };
+	      states.split(' ').forEach(function (state) {
+	        return _this2.emitter.on('leave:' + state, callback);
+	      });
+	    }
+	  }, {
+	    key: 'is',
+	    value: function is(state) {
+	      return this.get() == state;
+	    }
+	  }, {
+	    key: 'clear',
+	    value: function clear() {
+	      var state = this.get();
 
-  State.prototype.get = function get() {
-    var state = this._getStates()[0];
-    return state && state.replace(this._matcher(), '');
-  };
+	      if (state) {
+	        this.emitter.emit('leave:' + state);
+	        this.element.classList.remove('' + this.prefix + state);
+	      }
+	    }
+	  }, {
+	    key: '_getStates',
+	    value: function _getStates() {
+	      var matcher = this._matcher();
 
-  State.prototype.enter = function enter(states, callback) {
-    var _this = this;
+	      return filter.call(this.element.classList, function (klass) {
+	        return matcher.test(klass);
+	      });
+	    }
+	  }, {
+	    key: '_matcher',
+	    value: function _matcher() {
+	      return new RegExp('^' + this.prefix);
+	    }
+	  }]);
 
-    states.split(' ').forEach(function (state) {
-      return _this.emitter.on('enter:' + state, callback);
-    });
-  };
+	  return State;
+	})();
 
-  State.prototype.leave = function leave(states, callback) {
-    var _this2 = this;
+	exports.default = State;
 
-    states.split(' ').forEach(function (state) {
-      return _this2.emitter.on('leave:' + state, callback);
-    });
-  };
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
 
-  State.prototype.is = function is(state) {
-    return this.get() == state;
-  };
+	"use strict";
 
-  State.prototype.clear = function clear() {
-    var state = this.get();
+	function E() {
+	  // Keep this empty so it's easier to inherit from
+	  // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
+	}
 
-    if (state) {
-      this.emitter.emit('leave:' + state);
-      this.element.classList.remove('' + this.prefix + state);
-    }
-  };
+	E.prototype = {
+	  on: function on(name, callback, ctx) {
+	    var e = this.e || (this.e = {});
 
-  State.prototype._getStates = function _getStates() {
-    var matcher = this._matcher();
+	    (e[name] || (e[name] = [])).push({
+	      fn: callback,
+	      ctx: ctx
+	    });
 
-    return filter.call(this.element.classList, function (klass) {
-      return matcher.test(klass);
-    });
-  };
+	    return this;
+	  },
 
-  State.prototype._matcher = function _matcher() {
-    return new RegExp('^' + this.prefix);
-  };
+	  once: function once(name, callback, ctx) {
+	    var self = this;
+	    function listener() {
+	      self.off(name, listener);
+	      callback.apply(ctx, arguments);
+	    };
 
-  return State;
-})();
+	    listener._ = callback;
+	    return this.on(name, listener, ctx);
+	  },
 
-exports['default'] = State;
-module.exports = exports['default'];
+	  emit: function emit(name) {
+	    var data = [].slice.call(arguments, 1);
+	    var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+	    var i = 0;
+	    var len = evtArr.length;
 
-},{"tiny-emitter":1}]},{},[2])(2)
+	    for (i; i < len; i++) {
+	      evtArr[i].fn.apply(evtArr[i].ctx, data);
+	    }
+
+	    return this;
+	  },
+
+	  off: function off(name, callback) {
+	    var e = this.e || (this.e = {});
+	    var evts = e[name];
+	    var liveEvents = [];
+
+	    if (evts && callback) {
+	      for (var i = 0, len = evts.length; i < len; i++) {
+	        if (evts[i].fn !== callback && evts[i].fn._ !== callback) liveEvents.push(evts[i]);
+	      }
+	    }
+
+	    // Remove event from queue to prevent memory leak
+	    // Suggested by https://github.com/lazd
+	    // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
+
+	    liveEvents.length ? e[name] = liveEvents : delete e[name];
+
+	    return this;
+	  }
+	};
+
+	module.exports = E;
+
+/***/ }
+/******/ ])
 });
+;

@@ -2,35 +2,33 @@
   "name": "state",
   "version": "1.0.1",
   "description": "Manage element states through CSS.",
-  "repository": "lucasmazza/state",
+  "repository": "https://github.com/lucasmazza/state",
+  "author": "Lucas Mazza <lucastmazza@gmail.com>",
   "license": "Apache-2.0",
   "main": "lib/state.js",
-  "keywords": [
-
-  ],
+  "keywords": [],
   "dependencies": {
     "tiny-emitter": "^1.0.0"
   },
   "devDependencies": {
-    "babel": "^5.8.29",
-    "babelify": "^6.3.0",
-    "bannerify": "Vekat/bannerify#feature-option",
-    "browserify": "^11.2.0",
+    "babel-core": "^6.3.26",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "interpolate": "^0.1.0",
     "karma": "^0.13.15",
-    "karma-browserify": "^4.4.2",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-qunit": "^0.1.8",
+    "karma-webpack": "^1.7.0",
     "phantomjs": "^1.9.19",
     "qunitjs": "^1.20.0",
     "uglify-js": "^2.4.24",
-    "watchify": "^3.4.0"
+    "webpack": "^1.12.9"
   },
   "scripts": {
     "build": "npm run build-debug && npm run build-min",
-    "build-debug": "browserify src/state.js -s State -t [babelify --loose all] -p [bannerify --file .banner ] -o dist/state.js",
+    "build-debug": "webpack",
     "build-min": "uglifyjs dist/state.js --comments '/!/' -m screw_ie8=true -c screw_ie8=true,unused=false -o dist/state.min.js",
-    "build-watch": "watchify src/state.js -s State -t [babelify --loose all] -o dist/state.js -v",
     "test": "karma start --single-run",
-    "prepublish": "babel src --out-dir lib --loose all"
+    "prepublish": "babel src --out-dir lib --presets es2015"
   }
 }
