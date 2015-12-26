@@ -1,5 +1,5 @@
 /*!
- * state.js v0.1.0
+ * state.js v1.0.1
  * https://github.com/lucasmazza/state
  *
  * Licensed Apache 2.0 © Lucas Mazza
@@ -99,7 +99,7 @@ var State = (function () {
   State.prototype.set = function set(state) {
     this.clear();
     this.element.classList.add('' + this.prefix + state);
-    this.emitter.emit(state);
+    this.emitter.emit('enter:' + state);
   };
 
   State.prototype.get = function get() {
@@ -107,11 +107,19 @@ var State = (function () {
     return state && state.replace(this._matcher(), '');
   };
 
-  State.prototype.on = function on(states, callback) {
+  State.prototype.enter = function enter(states, callback) {
     var _this = this;
 
     states.split(' ').forEach(function (state) {
-      return _this.emitter.on(state, callback);
+      return _this.emitter.on('enter:' + state, callback);
+    });
+  };
+
+  State.prototype.leave = function leave(states, callback) {
+    var _this2 = this;
+
+    states.split(' ').forEach(function (state) {
+      return _this2.emitter.on('leave:' + state, callback);
     });
   };
 
@@ -120,11 +128,12 @@ var State = (function () {
   };
 
   State.prototype.clear = function clear() {
-    var _this2 = this;
+    var state = this.get();
 
-    this._getStates().forEach(function (klass) {
-      return _this2.element.classList.remove(klass);
-    });
+    if (state) {
+      this.emitter.emit('leave:' + state);
+      this.element.classList.remove('' + this.prefix + state);
+    }
   };
 
   State.prototype._getStates = function _getStates() {
