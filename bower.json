@@ -10,9 +10,11 @@
   "license": "Apache-2.0",
   "ignore": [
     "**/.*",
-    "src",
+    "karma.conf.js",
     "package.json",
     "script",
-    "test"
+    "src",
+    "test",
+    "webpack.config.js"
   ]
 }
