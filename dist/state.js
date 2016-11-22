@@ -1,5 +1,5 @@
 /*!
- * state v1.1.0
+ * @lucasmazza/state v1.1.0
  * https://github.com/lucasmazza/state
  * 
  * Licensed Apache-2.0 © Lucas Mazza <lucastmazza@gmail.com>
