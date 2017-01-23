@@ -79,11 +79,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var filter = Array.prototype.filter;
 
 	var State = (function () {
-	  function State(element) {
+	  function State(element, _ref) {
+	    var _ref$prefix = _ref.prefix;
+	    var prefix = _ref$prefix === undefined ? 'is-' : _ref$prefix;
+
 	    _classCallCheck(this, State);
 
 	    this.element = element;
-	    this.prefix = 'is-';
+	    this.prefix = prefix;
 	    this.emitter = new _tinyEmitter2.default();
 	  }
 

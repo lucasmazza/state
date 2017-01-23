@@ -3,9 +3,9 @@ import Emitter from 'tiny-emitter';
 const filter = Array.prototype.filter;
 
 export default class State {
-  constructor(element) {
+  constructor(element, options = { prefix: 'is-' }) {
     this.element = element;
-    this.prefix = 'is-';
+    this.prefix = options.prefix;
     this.emitter = new Emitter();
   }
 

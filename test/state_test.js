@@ -45,7 +45,7 @@ QUnit.test('triggers the callback when leaving the given state', function(assert
 });
 
 QUnit.test('supports a custom prefix for the state classes', function(assert) {
-  this.state.prefix = 'has-';
+  this.state = new State(this.element, { prefix: 'has-' });
   this.state.set('failed');
 
   assert.equal(this.element.getAttribute('class'), 'test-class has-failed');
