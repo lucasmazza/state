@@ -9,10 +9,10 @@ export default class State {
     this.emitter = new Emitter();
   }
 
-  set(state) {
+  set(state, context = {}) {
     this.clear();
     this.element.classList.add(`${this.prefix}${state}`);
-    this.emitter.emit(`enter:${state}`);
+    this.emitter.emit(`enter:${state}`, context);
   }
 
   get() {

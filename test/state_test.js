@@ -33,6 +33,15 @@ QUnit.test('triggers the callback when entering the given state', function(asser
   this.state.set('loading');
 });
 
+QUnit.test('supports passing a context object when entering a state', function(assert) {
+  this.state.enter('loaded', (context) => {
+    assert.equal('foo', context.contents);
+    assert.ok(true);
+  });
+
+  this.state.set('loaded', { contents: 'foo' });
+});
+
 QUnit.test('triggers the callback when leaving the given state', function(assert) {
   this.state.set('loading');
 
