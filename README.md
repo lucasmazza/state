@@ -1,5 +1,7 @@
 # State
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lucasmazza/state.svg)](https://greenkeeper.io/)
+
 **state** is a small library to manage an element state by adding/removing
 CSS classes, while maintaining a single class on the element whenever you change
 the state of the element.
