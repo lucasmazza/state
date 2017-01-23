@@ -1,5 +1,5 @@
 /*!
- * @lucasmazza/state v1.1.0
+ * @lucasmazza/state v1.2.0
  * https://github.com/lucasmazza/state
  * 
  * Licensed Apache-2.0 © Lucas Mazza <lucastmazza@gmail.com>
@@ -62,11 +62,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _tinyEmitter = __webpack_require__(1);
 
@@ -78,24 +78,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var filter = Array.prototype.filter;
 
-	var State = (function () {
-	  function State(element, _ref) {
-	    var _ref$prefix = _ref.prefix;
-	    var prefix = _ref$prefix === undefined ? 'is-' : _ref$prefix;
+	var State = function () {
+	  function State(element) {
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { prefix: 'is-' };
 
 	    _classCallCheck(this, State);
 
 	    this.element = element;
-	    this.prefix = prefix;
+	    this.prefix = options.prefix;
 	    this.emitter = new _tinyEmitter2.default();
 	  }
 
 	  _createClass(State, [{
 	    key: 'set',
 	    value: function set(state) {
+	      var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      this.clear();
 	      this.element.classList.add('' + this.prefix + state);
-	      this.emitter.emit('enter:' + state);
+	      this.emitter.emit('enter:' + state, context);
 	    }
 	  }, {
 	    key: 'get',
@@ -153,7 +154,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }]);
 
 	  return State;
-	})();
+	}();
 
 	exports.default = State;
 
