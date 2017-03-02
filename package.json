@@ -6,9 +6,7 @@
   "author": "Lucas Mazza <lucastmazza@gmail.com>",
   "license": "Apache-2.0",
   "main": "dist/state.js",
-  "keywords": [
-
-  ],
+  "keywords": [],
   "dependencies": {
     "tiny-emitter": "^1.0.0"
   },
@@ -23,7 +21,7 @@
     "karma-webpack": "^2.0.1",
     "phantomjs": "^2.1.7",
     "qunitjs": "^2.0.0",
-    "uglify-js": "^2.4.24",
+    "uglify-js": "^2.8.5",
     "webpack": "^2.2.1"
   },
   "scripts": {
