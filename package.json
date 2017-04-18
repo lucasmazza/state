@@ -8,7 +8,7 @@
   "main": "dist/state.js",
   "keywords": [],
   "dependencies": {
-    "tiny-emitter": "^1.0.0"
+    "tiny-emitter": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
